@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import styles from "./Checkout.module.css";
 
 const isEmpty = (value) => value.trim() === "";
-const isFiveChars = (value) => value.trim().length === 5;
+const isFiveChars = (value) => value.trim().length !== 5;
 
 const Checkout = (props) => {
   const [formValidity, setFormValidity] = useState({
@@ -41,6 +41,13 @@ const Checkout = (props) => {
     } else {
       return;
     }
+
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    });
   };
 
   const nameControlStyle = `${styles.control} ${
